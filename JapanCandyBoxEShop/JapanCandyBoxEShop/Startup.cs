@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using JapanCandyBoxEShop.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CandyEShopData;
 
 namespace JapanCandyBoxEShop
 {
@@ -34,6 +35,9 @@ namespace JapanCandyBoxEShop
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<EShopContext>(options =>
+               options.UseSqlServer(
+                   Configuration.GetConnectionString("DBConnection")));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
