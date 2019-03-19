@@ -33,14 +33,17 @@ namespace JapanCandyBoxEShop
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
 
+            });
+           /* services.Configure<DbContextOptionsBuilder>(options => {
+                options.UseSqlServer("DBConnection", b => b.MigrationsAssembly("JapanCandyBoxEShop"));
+                });*/
             services.AddDbContext<EShopContext>(options =>
                options.UseSqlServer(
                    Configuration.GetConnectionString("DBConnection")));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DBConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
